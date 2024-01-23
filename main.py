@@ -31,7 +31,7 @@ if file:
     if assessment is not None and grade is not None:
         st.markdown("# Grade - \n\n " + grade)
         st.markdown("## Assessment- \n\n " + assessment)
-        if c_grade:
+        if c_grade is not None:
             st.markdown("## component_grade- \n\n " + c_grade)
     else:
         st.write(full_response)
