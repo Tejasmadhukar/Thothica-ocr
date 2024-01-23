@@ -3,6 +3,8 @@ from openai import OpenAI
 from utils import images_to_txt
 import re
 
+st.title("Essay Evaluator")
+
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 file = st.file_uploader("Upload your essay")
