@@ -12,7 +12,7 @@ if file:
     text_data = "\n\n".join(texts)
 
     response = evaluate_essay(text_data)
-    full_response = response.choices[0].message.content.replace("\n", "")  # type: ignore
+    full_response = response.choices[0].message.content.replace("\n", "...,...")  # type: ignore
 
     assessment = None
     c_grade = None
@@ -21,6 +21,7 @@ if file:
     m = re.search(r"<assessment>(.*)</assessment>", full_response)
     if m:
         assessment = m.group(1)
+        print(assessment)
     m = re.search(r"<component_grade>(.*)</component_grade>", full_response)
     if m:
         c_score = m.group(1)
@@ -29,10 +30,10 @@ if file:
         grade = m.group(1)
 
     if assessment is not None and grade is not None:
-        st.markdown("# Grade - \n\n " + grade)
-        st.markdown("## Assessment- \n\n " + assessment)
+        st.markdown("# Grade - \n\n " + grade.replace("...,...", "\n"))
+        st.markdown("## Assessment- \n\n " + assessment.replace("...,...", "\n"))
         if c_grade is not None:
-            st.markdown("## component_grade- \n\n " + c_grade)
+            st.markdown("## component_grade- \n\n " + c_grade.replace("...,...", "\n"))
     else:
         st.write(full_response)
         st.write("Gpt produced incorrect response structure")
